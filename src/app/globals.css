@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #F7F7F7;
+  --color-warm-50: #FAFAFA;
+  --color-warm-100: #F0F0F0;
+  --color-warm-200: #E0E0E0;
+  --color-warm-300: #C8C8C8;
+  --color-warm-400: #A0A0A0;
+  --color-warm-500: #787878;
+  --color-warm-600: #585858;
+  --color-warm-700: #404040;
+  --color-warm-800: #282828;
+  --color-warm-900: #1A1A1A;
+  --color-rose-50: #FFF1F2;
+  --color-rose-100: #FFE4E6;
+  --color-rose-200: #FECDD3;
+  --color-rose-300: #FDA4AF;
+  --color-rose-400: #FB7185;
+  --color-rose-500: #F43F5E;
+  --color-rose-600: #E11D48;
+  --color-rose-700: #BE123C;
+  --color-rose-800: #9F1239;
+  --color-rose-900: #881337;
+  --color-brand-dark: #0A0A0A;
+  --color-brand-medium: #3A3A3A;
+  --color-brand-light: #7A7A7A;
+  --color-brand-gold: #FFFFFF;
+  --color-brand-cream: #E8E8E8;
+  --font-display: 'Georgia', 'Times New Roman', serif;
+  --font-body: system-ui, -apple-system, sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-cream);
+  color: var(--color-brand-dark);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+}

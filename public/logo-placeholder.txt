@@ -1,0 +1,5 @@
+Place your logo file here as "logo.png" (or logo.jpg, logo.svg).
+
+Then the website will automatically display it in the header, hero, and footer.
+
+Recommended size: 200x200px or larger (square or rectangular both work).
