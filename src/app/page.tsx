@@ -6,6 +6,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
 import CartDrawer from "@/components/CartDrawer";
+import WelcomeAudio from "@/components/WelcomeAudio";
+import ChakraLady from "@/components/ChakraLady";
 import { getProducts, getConfig } from "@/lib/store";
 import { getCart, addToCart, getCartCount, CartItem } from "@/lib/cart";
 import { Product, StoreConfig, CATEGORIES } from "@/lib/types";
@@ -52,6 +54,48 @@ export default function Home() {
           <div className="absolute top-10 left-10 w-72 h-72 bg-white rounded-full blur-3xl" />
           <div className="absolute bottom-10 right-10 w-96 h-96 bg-gray-400 rounded-full blur-3xl" />
         </div>
+        {/* Chakra Lady — top left corner */}
+        <div className="absolute top-4 left-4 sm:top-8 sm:left-8 hidden sm:block">
+          <div className="relative">
+            <img
+              src="/chakra-lady.png"
+              alt="Chakra meditation"
+              className="w-40 md:w-52 lg:w-64"
+              style={{ transform: "scaleX(-1)", mixBlendMode: "lighten" }}
+            />
+            {/* Electric current ring around ball */}
+            <svg className="absolute top-[40%] left-[25%] w-[50%] h-[28%] pointer-events-none" viewBox="0 0 60 60" fill="none">
+              <ellipse cx="30" cy="30" rx="26" ry="26" stroke="rgba(100,180,255,0.5)" strokeWidth="0.8" className="animate-electricity-1" fill="none" />
+              <ellipse cx="30" cy="30" rx="24" ry="24" stroke="rgba(150,210,255,0.4)" strokeWidth="0.6" className="animate-electricity-2" fill="none" />
+              <ellipse cx="30" cy="30" rx="28" ry="28" stroke="rgba(80,160,255,0.3)" strokeWidth="0.5" className="animate-electricity-3" fill="none" />
+              <path d="M4 30 Q10 20 16 28 Q20 14 26 24 Q30 8 34 24 Q38 14 44 28 Q50 20 56 30" stroke="rgba(150,200,255,0.7)" strokeWidth="0.7" fill="none" className="animate-electricity-2" />
+              <path d="M4 30 Q10 40 16 32 Q20 46 26 36 Q30 52 34 36 Q38 46 44 32 Q50 40 56 30" stroke="rgba(120,190,255,0.6)" strokeWidth="0.7" fill="none" className="animate-electricity-3" />
+              <path d="M30 4 Q20 10 28 16 Q14 20 24 26 Q8 30 24 34 Q14 38 28 44 Q20 50 30 56" stroke="rgba(140,200,255,0.5)" strokeWidth="0.6" fill="none" className="animate-electricity-1" />
+              <path d="M30 4 Q40 10 32 16 Q46 20 36 26 Q52 30 36 34 Q46 38 32 44 Q40 50 30 56" stroke="rgba(130,195,255,0.5)" strokeWidth="0.6" fill="none" className="animate-electricity-2" />
+            </svg>
+          </div>
+        </div>
+        {/* Chakra Lady — top right corner */}
+        <div className="absolute top-4 right-4 sm:top-8 sm:right-8 hidden sm:block">
+          <div className="relative">
+            <img
+              src="/chakra-lady.png"
+              alt="Chakra meditation"
+              className="w-40 md:w-52 lg:w-64"
+              style={{ mixBlendMode: "lighten" }}
+            />
+            {/* Electric current ring around ball */}
+            <svg className="absolute top-[40%] left-[25%] w-[50%] h-[28%] pointer-events-none" viewBox="0 0 60 60" fill="none">
+              <ellipse cx="30" cy="30" rx="26" ry="26" stroke="rgba(100,180,255,0.5)" strokeWidth="0.8" className="animate-electricity-1" fill="none" />
+              <ellipse cx="30" cy="30" rx="24" ry="24" stroke="rgba(150,210,255,0.4)" strokeWidth="0.6" className="animate-electricity-3" fill="none" />
+              <ellipse cx="30" cy="30" rx="28" ry="28" stroke="rgba(80,160,255,0.3)" strokeWidth="0.5" className="animate-electricity-2" fill="none" />
+              <path d="M4 30 Q10 20 16 28 Q20 14 26 24 Q30 8 34 24 Q38 14 44 28 Q50 20 56 30" stroke="rgba(150,200,255,0.7)" strokeWidth="0.7" fill="none" className="animate-electricity-3" />
+              <path d="M4 30 Q10 40 16 32 Q20 46 26 36 Q30 52 34 36 Q38 46 44 32 Q50 40 56 30" stroke="rgba(120,190,255,0.6)" strokeWidth="0.7" fill="none" className="animate-electricity-1" />
+              <path d="M30 4 Q20 10 28 16 Q14 20 24 26 Q8 30 24 34 Q14 38 28 44 Q20 50 30 56" stroke="rgba(140,200,255,0.5)" strokeWidth="0.6" fill="none" className="animate-electricity-2" />
+              <path d="M30 4 Q40 10 32 16 Q46 20 36 26 Q52 30 36 34 Q46 38 32 44 Q40 50 30 56" stroke="rgba(130,195,255,0.5)" strokeWidth="0.6" fill="none" className="animate-electricity-1" />
+            </svg>
+          </div>
+        </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-32 text-center">
           <img
             src="/logo.png"
@@ -77,11 +121,12 @@ export default function Home() {
           </p>
           <p className="max-w-2xl mx-auto text-sm sm:text-base text-brand-cream/60 leading-relaxed mb-8">
             {config?.aboutText ||
-              "Handcrafted candles and premium beauty products to nourish your mind, body, and soul."}
+              "We are an aroma therapy & holistic healing company that sells all natural and organic products. We create handcrafted candles and curate premium beauty products to nourish your mind, body, and soul. Every product is made with love and intention."}
           </p>
+          <WelcomeAudio />
           <a
             href="#shop"
-            className="inline-flex items-center gap-2 bg-white text-brand-dark px-8 py-3 rounded-full font-semibold uppercase tracking-wider text-sm hover:bg-brand-cream transition-colors duration-300"
+            className="electric-card-hover inline-flex items-center gap-2 bg-white text-brand-dark px-8 py-3 rounded-full font-semibold uppercase tracking-wider text-sm hover:bg-brand-cream transition-colors duration-300"
           >
             Shop Now
           </a>
@@ -104,6 +149,20 @@ export default function Home() {
           </div>
         </section>
       )}
+
+      {/* Coming Soon — Clothing Apparel */}
+      <section className="relative bg-brand-dark py-16 overflow-hidden">
+        <div className="max-w-3xl mx-auto px-6 sm:px-10 py-10 text-center">
+          <p className="text-sm uppercase tracking-[0.3em] font-bold mb-4 animate-text-shine-grey">✦ Coming Soon ✦</p>
+          <h2 className="text-4xl sm:text-6xl font-display font-bold mb-4 animate-text-shine-grey">
+            Clothing &amp; Apparel
+          </h2>
+          <div className="w-16 h-0.5 bg-white/20 mx-auto mb-4" />
+          <p className="text-brand-cream/50 text-sm sm:text-base max-w-xl mx-auto">
+            We&apos;re expanding! Stay tuned for our exclusive line of branded clothing and apparel — designed with the same love and intention as all our products.
+          </p>
+        </div>
+      </section>
 
       {/* Shop All */}
       <section id="shop" className="bg-white py-16">

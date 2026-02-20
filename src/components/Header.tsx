@@ -39,25 +39,25 @@ export default function Header({ cartCount = 0, onCartClick }: HeaderProps) {
           <nav className="hidden md:flex items-center gap-8">
             <Link
               href="/"
-              className="text-sm tracking-wide uppercase text-brand-cream/80 hover:text-brand-gold transition-colors"
+              className="electric-hover relative text-sm tracking-wide uppercase text-brand-cream/80 hover:text-white transition-all duration-300 hover:scale-110 after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:w-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 hover:after:w-full"
             >
               Shop
             </Link>
             <Link
               href="/#about"
-              className="text-sm tracking-wide uppercase text-brand-cream/80 hover:text-brand-gold transition-colors"
+              className="relative text-sm tracking-wide uppercase text-brand-cream/80 hover:text-white transition-all duration-300 hover:scale-110 after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:w-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 hover:after:w-full"
             >
               About
             </Link>
             <Link
               href="/#contact"
-              className="text-sm tracking-wide uppercase text-brand-cream/80 hover:text-brand-gold transition-colors"
+              className="relative text-sm tracking-wide uppercase text-brand-cream/80 hover:text-white transition-all duration-300 hover:scale-110 after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:w-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 hover:after:w-full"
             >
               Contact
             </Link>
             <Link
               href="/admin"
-              className="flex items-center gap-1 text-sm tracking-wide uppercase text-brand-cream/60 hover:text-brand-gold transition-colors"
+              className="relative flex items-center gap-1 text-sm tracking-wide uppercase text-brand-cream/60 hover:text-white transition-all duration-300 hover:scale-110 after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:w-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 hover:after:w-full"
             >
               <Settings size={14} />
               Admin
@@ -107,28 +107,28 @@ export default function Header({ cartCount = 0, onCartClick }: HeaderProps) {
             <Link
               href="/"
               onClick={() => setMenuOpen(false)}
-              className="block text-sm tracking-wide uppercase text-brand-cream/80 hover:text-brand-gold"
+              className="block text-sm tracking-wide uppercase text-brand-cream/80 hover:text-white hover:translate-x-2 transition-all duration-300"
             >
               Shop
             </Link>
             <Link
               href="/#about"
               onClick={() => setMenuOpen(false)}
-              className="block text-sm tracking-wide uppercase text-brand-cream/80 hover:text-brand-gold"
+              className="block text-sm tracking-wide uppercase text-brand-cream/80 hover:text-white hover:translate-x-2 transition-all duration-300"
             >
               About
             </Link>
             <Link
               href="/#contact"
               onClick={() => setMenuOpen(false)}
-              className="block text-sm tracking-wide uppercase text-brand-cream/80 hover:text-brand-gold"
+              className="block text-sm tracking-wide uppercase text-brand-cream/80 hover:text-white hover:translate-x-2 transition-all duration-300"
             >
               Contact
             </Link>
             <Link
               href="/admin"
               onClick={() => setMenuOpen(false)}
-              className="flex items-center gap-1 text-sm tracking-wide uppercase text-brand-cream/60 hover:text-brand-gold"
+              className="flex items-center gap-1 text-sm tracking-wide uppercase text-brand-cream/60 hover:text-white hover:translate-x-2 transition-all duration-300"
             >
               <Settings size={14} />
               Admin

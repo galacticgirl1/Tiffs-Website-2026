@@ -11,7 +11,7 @@ interface ProductCardProps {
 
 export default function ProductCard({ product, onAddToCart }: ProductCardProps) {
   return (
-    <div className="group bg-white rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden border border-brand-cream">
+    <div className="group electric-card-hover bg-white rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden border border-brand-cream cursor-pointer">
       <div className="relative aspect-square overflow-hidden bg-brand-cream">
         {product.imageUrl ? (
           <img

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="700" viewBox="0 0 600 700">
+  <rect width="600" height="700" fill="#f5f5f5" rx="12"/>
+  <!-- Hoodie body -->
+  <path d="M180 200 L180 550 Q180 570 200 570 L400 570 Q420 570 420 550 L420 200" fill="#1a1a1a" stroke="#333" stroke-width="2"/>
+  <!-- Hood -->
+  <path d="M180 200 Q180 120 230 100 Q270 85 300 80 Q330 85 370 100 Q420 120 420 200" fill="#1a1a1a" stroke="#333" stroke-width="2"/>
+  <!-- Hood opening -->
+  <path d="M230 200 Q230 140 270 125 Q290 118 300 115 Q310 118 330 125 Q370 140 370 200" fill="#2a2a2a" stroke="#444" stroke-width="1"/>
+  <!-- Left sleeve -->
+  <path d="M180 200 L100 280 L100 350 Q100 360 110 360 L160 360 L160 280 L180 260" fill="#1a1a1a" stroke="#333" stroke-width="2"/>
+  <!-- Right sleeve -->
+  <path d="M420 200 L500 280 L500 350 Q500 360 490 360 L440 360 L440 280 L420 260" fill="#1a1a1a" stroke="#333" stroke-width="2"/>
+  <!-- Kangaroo pocket -->
+  <rect x="220" y="400" width="160" height="80" rx="8" fill="#222" stroke="#444" stroke-width="1"/>
+  <!-- MBS Logo circle on chest -->
+  <circle cx="300" cy="310" r="45" fill="none" stroke="#888" stroke-width="2"/>
+  <circle cx="300" cy="310" r="40" fill="none" stroke="#666" stroke-width="1"/>
+  <!-- MBS text -->
+  <text x="300" y="305" text-anchor="middle" font-family="Georgia, serif" font-size="28" font-weight="bold" fill="#ccc">MBS</text>
+  <text x="300" y="325" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#999" letter-spacing="2">MIND BODY &amp; SOUL</text>
+  <!-- Drawstrings -->
+  <line x1="280" y1="200" x2="275" y2="260" stroke="#666" stroke-width="1.5"/>
+  <line x1="320" y1="200" x2="325" y2="260" stroke="#666" stroke-width="1.5"/>
+  <!-- Ribbing at bottom -->
+  <rect x="180" y="550" width="240" height="20" rx="4" fill="#111" stroke="#333" stroke-width="1"/>
+  <!-- Label -->
+  <text x="300" y="650" text-anchor="middle" font-family="Georgia, serif" font-size="22" font-weight="bold" fill="#333">MBS Black Hoodie</text>
+  <text x="300" y="675" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#666">Reactivate Mind Body &amp; Soul</text>
+</svg>

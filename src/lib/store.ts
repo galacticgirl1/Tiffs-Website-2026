@@ -2,14 +2,14 @@
 
 import { Product, StoreConfig } from "./types";
 
-const PRODUCTS_KEY = "mbs_products_v2";
-const CONFIG_KEY = "mbs_config_v2";
+const PRODUCTS_KEY = "mbs_products_v6";
+const CONFIG_KEY = "mbs_config_v6";
 
 const DEFAULT_CONFIG: StoreConfig = {
   businessName: "Reactivate MBS",
   tagline: "Mind Body & Soul",
   aboutText:
-    "Welcome to Reactivate MBS Mind Body & Soul LLC. We create handcrafted candles and curate premium beauty products to nourish your mind, body, and soul. Every product is made with love and intention.",
+    "We are an aroma therapy & holistic healing company that sells all natural and organic products. We create handcrafted candles and curate premium beauty products to nourish your mind, body, and soul. Every product is made with love and intention.",
   socialLinks: {
     instagram: "https://instagram.com/reactivatembs",
     facebook: "https://facebook.com/reactivatembs",
@@ -96,6 +96,32 @@ const SAMPLE_PRODUCTS: Product[] = [
     price: 64.99,
     category: "bundles",
     imageUrl: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=400&h=400&fit=crop",
+    purchaseLink: "#",
+    featured: true,
+    inStock: true,
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: "8",
+    name: "MBS Hoodie + Sweats Set",
+    description:
+      "Complete matching set — black hoodie with MBS logo and sweatpants with 'Soak in Bliss' running down the leg. Save $10 when you buy the set!",
+    price: 40.00,
+    category: "apparel",
+    imageUrl: "/apparel-hoodie-set.svg",
+    purchaseLink: "#",
+    featured: true,
+    inStock: true,
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: "9",
+    name: "MBS White Robe — Soak in Bliss",
+    description:
+      "Luxurious white spa robe with 'Soak in Bliss' embroidered on the left chest and the MBS logo on the back. Perfect for your self-care routine.",
+    price: 45.00,
+    category: "apparel",
+    imageUrl: "/apparel-robe-white.svg",
     purchaseLink: "#",
     featured: true,
     inStock: true,

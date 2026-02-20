@@ -40,3 +40,154 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
 }
+
+@keyframes text-shine {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+.animate-text-shine {
+  background: linear-gradient(
+    90deg,
+    #ffffff 0%,
+    #ffffff 35%,
+    #fefefe 45%,
+    #ffffff 50%,
+    #fefefe 55%,
+    #ffffff 65%,
+    #ffffff 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: text-shine 5s linear infinite;
+  filter: drop-shadow(0 0 6px rgba(255,255,255,0.3)) drop-shadow(0 0 15px rgba(255,255,255,0.1));
+}
+
+@keyframes electricity-1 {
+  0%, 100% { opacity: 0.9; transform: scaleY(1); }
+  25% { opacity: 0.2; transform: scaleY(0.95); }
+  50% { opacity: 1; transform: scaleY(1.05); }
+  75% { opacity: 0.3; transform: scaleY(0.98); }
+}
+
+@keyframes electricity-2 {
+  0%, 100% { opacity: 0.4; transform: scaleX(1.02); }
+  20% { opacity: 1; transform: scaleX(0.98); }
+  40% { opacity: 0.1; transform: scaleX(1); }
+  60% { opacity: 0.8; transform: scaleX(1.03); }
+  80% { opacity: 0.2; transform: scaleX(0.97); }
+}
+
+@keyframes electricity-3 {
+  0%, 100% { opacity: 0.6; transform: translate(0, 0); }
+  15% { opacity: 0.1; transform: translate(1px, -1px); }
+  30% { opacity: 0.9; transform: translate(-1px, 1px); }
+  45% { opacity: 0.2; transform: translate(0, 0); }
+  60% { opacity: 1; transform: translate(1px, 0); }
+  75% { opacity: 0.15; transform: translate(-1px, -1px); }
+  90% { opacity: 0.7; transform: translate(0, 1px); }
+}
+
+@keyframes energy-charge {
+  0% { opacity: 0.2; transform: translate(-50%, -50%) scale(0.8); }
+  15% { opacity: 0.9; transform: translate(-50%, -50%) scale(1.2); }
+  30% { opacity: 0.3; transform: translate(-50%, -50%) scale(0.9); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.3); }
+  65% { opacity: 0.4; transform: translate(-50%, -50%) scale(1); }
+  80% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.15); }
+  100% { opacity: 0.2; transform: translate(-50%, -50%) scale(0.8); }
+}
+
+@keyframes energy-charge-inner {
+  0% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+  20% { opacity: 1; transform: translate(-50%, -50%) scale(1.4); }
+  40% { opacity: 0.2; transform: translate(-50%, -50%) scale(0.7); }
+  60% { opacity: 0.9; transform: translate(-50%, -50%) scale(1.2); }
+  80% { opacity: 0.15; transform: translate(-50%, -50%) scale(0.9); }
+  100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+}
+
+.animate-energy-charge {
+  animation: energy-charge 2s ease-in-out infinite;
+}
+
+.animate-energy-charge-inner {
+  animation: energy-charge-inner 1.5s ease-in-out infinite;
+}
+
+.animate-electricity-1 {
+  animation: electricity-1 0.3s linear infinite;
+}
+
+.animate-electricity-2 {
+  animation: electricity-2 0.25s linear infinite;
+}
+
+.animate-electricity-3 {
+  animation: electricity-3 0.35s linear infinite;
+}
+
+/* Electric highlight effect for nav links and product cards */
+@keyframes electric-flash {
+  0% { text-shadow: 0 0 4px rgba(100,180,255,0.4), 0 0 8px rgba(100,180,255,0.2); }
+  10% { text-shadow: 0 0 8px rgba(150,210,255,0.8), 0 0 20px rgba(100,180,255,0.5), 0 0 40px rgba(80,160,255,0.3); }
+  20% { text-shadow: 0 0 2px rgba(100,180,255,0.2); }
+  30% { text-shadow: 0 0 12px rgba(180,220,255,0.9), 0 0 25px rgba(100,180,255,0.6), 0 0 50px rgba(80,160,255,0.3); }
+  40% { text-shadow: 0 0 4px rgba(100,180,255,0.3); }
+  50% { text-shadow: 0 0 6px rgba(150,200,255,0.7), 0 0 15px rgba(100,180,255,0.4); }
+  60% { text-shadow: 0 0 2px rgba(100,180,255,0.1); }
+  70% { text-shadow: 0 0 10px rgba(180,220,255,0.8), 0 0 30px rgba(100,180,255,0.5); }
+  80% { text-shadow: 0 0 3px rgba(100,180,255,0.2); }
+  90% { text-shadow: 0 0 8px rgba(150,210,255,0.6), 0 0 20px rgba(100,180,255,0.3); }
+  100% { text-shadow: 0 0 4px rgba(100,180,255,0.4), 0 0 8px rgba(100,180,255,0.2); }
+}
+
+@keyframes electric-border-flash {
+  0% { box-shadow: 0 0 4px rgba(100,180,255,0.3); }
+  15% { box-shadow: 0 0 10px rgba(150,210,255,0.7), 0 0 25px rgba(100,180,255,0.4), inset 0 0 8px rgba(100,180,255,0.1); }
+  30% { box-shadow: 0 0 2px rgba(100,180,255,0.1); }
+  45% { box-shadow: 0 0 15px rgba(180,220,255,0.8), 0 0 35px rgba(100,180,255,0.4), inset 0 0 12px rgba(100,180,255,0.15); }
+  60% { box-shadow: 0 0 3px rgba(100,180,255,0.2); }
+  75% { box-shadow: 0 0 8px rgba(150,200,255,0.6), 0 0 20px rgba(100,180,255,0.3); }
+  100% { box-shadow: 0 0 4px rgba(100,180,255,0.3); }
+}
+
+.electric-hover:hover {
+  animation: electric-flash 0.8s ease-in-out infinite;
+  color: #fff !important;
+}
+
+.electric-hover:active {
+  animation: electric-flash 0.3s ease-in-out infinite;
+  color: #c8e6ff !important;
+}
+
+.electric-card-hover:hover {
+  animation: electric-border-flash 1s ease-in-out infinite;
+  border-color: rgba(100,180,255,0.4);
+}
+
+.electric-card-hover:active {
+  animation: electric-border-flash 0.4s ease-in-out infinite;
+}
+
+.animate-text-shine-grey {
+  background: linear-gradient(
+    90deg,
+    #888888 0%,
+    #888888 30%,
+    #cccccc 40%,
+    #ffffff 50%,
+    #cccccc 60%,
+    #888888 70%,
+    #888888 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: text-shine 5s linear infinite;
+  filter: drop-shadow(0 0 8px rgba(255,255,255,0.5)) drop-shadow(0 0 20px rgba(255,255,255,0.2));
+}
