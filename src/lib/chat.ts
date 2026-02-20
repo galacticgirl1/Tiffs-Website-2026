@@ -1,5 +1,7 @@
 "use client";
 
+import { sanitizeText } from "./sanitize";
+
 export interface ChatMessage {
   id: string;
   conversationId: string;
@@ -68,12 +70,15 @@ export function sendMessage(
   text: string,
   customerName?: string
 ): ChatMessage {
+  const sanitizedText = sanitizeText(text);
+  const sanitizedName = customerName ? sanitizeText(customerName) : undefined;
+
   const allMessages = getAllMessages();
   const message: ChatMessage = {
     id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
     conversationId,
     sender,
-    text,
+    text: sanitizedText,
     timestamp: new Date().toISOString(),
     read: false,
   };
@@ -85,15 +90,15 @@ export function sendMessage(
   if (!convo) {
     convo = {
       id: conversationId,
-      customerName: customerName || "Guest",
-      lastMessage: text,
+      customerName: sanitizedName || "Guest",
+      lastMessage: sanitizedText,
       lastTimestamp: message.timestamp,
       unreadCount: sender === "customer" ? 1 : 0,
       status: "active",
     };
     convos.unshift(convo);
   } else {
-    convo.lastMessage = text;
+    convo.lastMessage = sanitizedText;
     convo.lastTimestamp = message.timestamp;
     if (sender === "customer") {
       convo.unreadCount += 1;

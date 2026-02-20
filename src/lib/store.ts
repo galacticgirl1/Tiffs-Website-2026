@@ -1,6 +1,7 @@
 "use client";
 
 import { Product, StoreConfig } from "./types";
+import { sanitizeText, sanitizeUrl, sanitizeImageUrl } from "./sanitize";
 
 const PRODUCTS_KEY = "mbs_products_v6";
 const CONFIG_KEY = "mbs_config_v6";
@@ -143,10 +144,21 @@ export function saveProducts(products: Product[]) {
   localStorage.setItem(PRODUCTS_KEY, JSON.stringify(products));
 }
 
+function sanitizeProduct(product: Partial<Product>): Partial<Product> {
+  const sanitized = { ...product };
+  if (sanitized.name) sanitized.name = sanitizeText(sanitized.name);
+  if (sanitized.description) sanitized.description = sanitizeText(sanitized.description);
+  if (sanitized.imageUrl) sanitized.imageUrl = sanitizeImageUrl(sanitized.imageUrl);
+  if (sanitized.purchaseLink) sanitized.purchaseLink = sanitizeUrl(sanitized.purchaseLink);
+  return sanitized;
+}
+
 export function addProduct(product: Omit<Product, "id" | "createdAt">): Product {
   const products = getProducts();
+  const sanitized = sanitizeProduct(product);
   const newProduct: Product = {
     ...product,
+    ...sanitized,
     id: Date.now().toString(),
     createdAt: new Date().toISOString(),
   };
@@ -159,7 +171,8 @@ export function updateProduct(id: string, updates: Partial<Product>): Product | 
   const products = getProducts();
   const index = products.findIndex((p) => p.id === id);
   if (index === -1) return null;
-  products[index] = { ...products[index], ...updates };
+  const sanitized = sanitizeProduct(updates);
+  products[index] = { ...products[index], ...sanitized };
   saveProducts(products);
   return products[index];
 }
@@ -183,5 +196,21 @@ export function getConfig(): StoreConfig {
 }
 
 export function saveConfig(config: StoreConfig) {
-  localStorage.setItem(CONFIG_KEY, JSON.stringify(config));
+  const sanitized: StoreConfig = {
+    ...config,
+    businessName: sanitizeText(config.businessName),
+    tagline: sanitizeText(config.tagline),
+    aboutText: sanitizeText(config.aboutText),
+    socialLinks: {
+      instagram: sanitizeUrl(config.socialLinks.instagram),
+      facebook: sanitizeUrl(config.socialLinks.facebook),
+      tiktok: sanitizeUrl(config.socialLinks.tiktok),
+      pinterest: sanitizeUrl(config.socialLinks.pinterest),
+      youtube: sanitizeUrl(config.socialLinks.youtube),
+      twitter: sanitizeUrl(config.socialLinks.twitter),
+      website: sanitizeUrl(config.socialLinks.website),
+    },
+    heroImageUrl: sanitizeImageUrl(config.heroImageUrl),
+  };
+  localStorage.setItem(CONFIG_KEY, JSON.stringify(sanitized));
 }
