@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Lock, Eye, EyeOff } from "lucide-react";
 
 const ADMIN_KEY = "mbs_admin_auth";
-const ADMIN_PASSWORD = "MBS2026admin!";
+const ADMIN_PASSWORD = "Starseed888#";
 
 interface AdminAuthProps {
   children: React.ReactNode;
