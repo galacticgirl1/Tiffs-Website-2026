@@ -11,13 +11,13 @@ const CART_KEY = "mbs_cart";
 
 export function getCart(): CartItem[] {
   if (typeof window === "undefined") return [];
-  const stored = localStorage.getItem(CART_KEY);
+  const stored = sessionStorage.getItem(CART_KEY);
   if (!stored) return [];
   return JSON.parse(stored);
 }
 
 export function saveCart(cart: CartItem[]) {
-  localStorage.setItem(CART_KEY, JSON.stringify(cart));
+  sessionStorage.setItem(CART_KEY, JSON.stringify(cart));
 }
 
 export function addToCart(product: Product, quantity: number = 1): CartItem[] {
@@ -49,7 +49,7 @@ export function updateCartQuantity(productId: string, quantity: number): CartIte
 }
 
 export function clearCart(): void {
-  localStorage.removeItem(CART_KEY);
+  sessionStorage.removeItem(CART_KEY);
 }
 
 export function getCartTotal(cart: CartItem[]): number {
