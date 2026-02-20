@@ -72,9 +72,6 @@ export default function Footer() {
               <li>
                 <a href="/#contact" className="hover:text-white transition-colors">Contact</a>
               </li>
-              <li>
-                <a href="/admin" className="hover:text-white transition-colors">Store Admin</a>
-              </li>
             </ul>
           </div>
 

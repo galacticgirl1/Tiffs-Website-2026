@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, X, Settings } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import SpaBasketIcon from "@/components/SpaBasketIcon";
 
 interface HeaderProps {
@@ -54,13 +54,6 @@ export default function Header({ cartCount = 0, onCartClick }: HeaderProps) {
               className="relative text-sm tracking-wide uppercase text-brand-cream/80 hover:text-white transition-all duration-300 hover:scale-110 after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:w-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 hover:after:w-full"
             >
               Contact
-            </Link>
-            <Link
-              href="/admin"
-              className="relative flex items-center gap-1 text-sm tracking-wide uppercase text-brand-cream/60 hover:text-white transition-all duration-300 hover:scale-110 after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:w-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 hover:after:w-full"
-            >
-              <Settings size={14} />
-              Admin
             </Link>
             {onCartClick && (
               <button
@@ -124,14 +117,6 @@ export default function Header({ cartCount = 0, onCartClick }: HeaderProps) {
               className="block text-sm tracking-wide uppercase text-brand-cream/80 hover:text-white hover:translate-x-2 transition-all duration-300"
             >
               Contact
-            </Link>
-            <Link
-              href="/admin"
-              onClick={() => setMenuOpen(false)}
-              className="flex items-center gap-1 text-sm tracking-wide uppercase text-brand-cream/60 hover:text-white hover:translate-x-2 transition-all duration-300"
-            >
-              <Settings size={14} />
-              Admin
             </Link>
           </div>
         </div>

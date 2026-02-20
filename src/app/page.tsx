@@ -211,11 +211,7 @@ export default function Home() {
             <div className="text-center py-20 text-brand-light">
               <p className="text-lg">No products in this category yet.</p>
               <p className="text-sm mt-2">
-                Check back soon or visit the{" "}
-                <a href="/admin" className="text-brand-dark underline font-semibold">
-                  admin panel
-                </a>{" "}
-                to add products.
+                Check back soon — new products are added regularly!
               </p>
             </div>
           )}
