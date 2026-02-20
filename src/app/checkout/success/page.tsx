@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { Suspense, useEffect, useState, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { CheckCircle, ArrowLeft, Package, Printer, Mail } from "lucide-react";
@@ -8,6 +8,14 @@ import { getCart, clearCart, getCartTotal, CartItem } from "@/lib/cart";
 import { addOrder, getOrderBySessionId, Order } from "@/lib/orders";
 
 export default function CheckoutSuccess() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-cream flex items-center justify-center"><p className="text-brand-light">Loading...</p></div>}>
+      <CheckoutSuccessContent />
+    </Suspense>
+  );
+}
+
+function CheckoutSuccessContent() {
   const searchParams = useSearchParams();
   const sessionId = searchParams.get("session_id") || "";
   const [order, setOrder] = useState<Order | null>(null);
