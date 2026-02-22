@@ -1,9 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Lock, Eye, EyeOff } from "lucide-react";
 
-const ADMIN_KEY = "mbs_admin_auth";
 const ADMIN_PASSWORD = "Starseed888#";
 
 interface AdminAuthProps {
@@ -15,34 +14,15 @@ export default function AdminAuth({ children }: AdminAuthProps) {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
-  const [checking, setChecking] = useState(true);
-
-  useEffect(() => {
-    const stored = sessionStorage.getItem(ADMIN_KEY);
-    if (stored === "true") {
-      setIsAuthenticated(true);
-    }
-    setChecking(false);
-  }, []);
-
   function handleLogin(e: React.FormEvent) {
     e.preventDefault();
     if (password === ADMIN_PASSWORD) {
-      sessionStorage.setItem(ADMIN_KEY, "true");
       setIsAuthenticated(true);
       setError("");
     } else {
       setError("Incorrect password");
       setPassword("");
     }
-  }
-
-  if (checking) {
-    return (
-      <div className="min-h-screen bg-brand-dark flex items-center justify-center">
-        <p className="text-brand-cream/60">Loading...</p>
-      </div>
-    );
   }
 
   if (!isAuthenticated) {
