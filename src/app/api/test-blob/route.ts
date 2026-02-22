@@ -13,7 +13,7 @@ export async function GET() {
   if (hasToken) {
     try {
       const result = await put("test-connection.txt", "hello", {
-        access: "public",
+        access: "private",
         addRandomSuffix: false,
       });
       blobTest = "SUCCESS - wrote to: " + result.url;

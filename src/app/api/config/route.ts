@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { put, list } from "@vercel/blob";
 
+export const dynamic = "force-dynamic";
+
 const CONFIG_BLOB_KEY = "mbs-config.json";
 const ADMIN_PASSWORD = "Starseed888#";
 
@@ -25,7 +27,7 @@ async function getConfig() {
   try {
     const { blobs } = await list({ prefix: CONFIG_BLOB_KEY });
     if (blobs.length > 0) {
-      const response = await fetch(blobs[0].url, { cache: "no-store" });
+      const response = await fetch(blobs[0].downloadUrl, { cache: "no-store" });
       if (response.ok) {
         return await response.json();
       }
@@ -58,7 +60,7 @@ export async function POST(request: NextRequest) {
     }
 
     const blob = await put(CONFIG_BLOB_KEY, JSON.stringify(config), {
-      access: "public",
+      access: "private",
       addRandomSuffix: false,
     });
 
