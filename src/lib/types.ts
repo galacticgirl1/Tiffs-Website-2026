@@ -3,7 +3,7 @@ export interface Product {
   name: string;
   description: string;
   price: number;
-  category: "candles" | "beauty" | "skincare" | "body" | "bundles" | "apparel";
+  category: "candles" | "beauty" | "skincare" | "body" | "bundles" | "apparel" | "bath-salts";
   imageUrl: string;
   purchaseLink: string;
   featured: boolean;
@@ -36,4 +36,5 @@ export const CATEGORIES: { value: Product["category"]; label: string }[] = [
   { value: "body", label: "Body Care" },
   { value: "bundles", label: "Gift Bundles" },
   { value: "apparel", label: "Apparel" },
+  { value: "bath-salts", label: "Bath Salts" },
 ];
