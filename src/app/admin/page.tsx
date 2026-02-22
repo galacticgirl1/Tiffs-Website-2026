@@ -456,7 +456,7 @@ export default function AdminPage() {
                       type="file"
                       accept="image/*"
                       className="hidden"
-                      onChange={(e) => {
+                      onChange={async (e) => {
                         const file = e.target.files?.[0];
                         if (!file) return;
                         if (file.size > 5 * 1024 * 1024) {
@@ -464,22 +464,30 @@ export default function AdminPage() {
                           return;
                         }
                         setUploadingImage(true);
-                        const reader = new FileReader();
-                        reader.onloadend = () => {
-                          setForm({ ...form, imageUrl: reader.result as string });
-                          setUploadingImage(false);
-                        };
-                        reader.onerror = () => {
-                          alert("Failed to read image. Please try again.");
-                          setUploadingImage(false);
-                        };
-                        reader.readAsDataURL(file);
+                        try {
+                          const formData = new FormData();
+                          formData.append("file", file);
+                          formData.append("password", adminPassword);
+                          const res = await fetch("/api/upload", {
+                            method: "POST",
+                            body: formData,
+                          });
+                          const data = await res.json();
+                          if (res.ok && data.url) {
+                            setForm({ ...form, imageUrl: data.url });
+                          } else {
+                            alert("Upload failed: " + (data.error || "Unknown error"));
+                          }
+                        } catch (err) {
+                          alert("Upload failed: " + String(err));
+                        }
+                        setUploadingImage(false);
                         e.target.value = "";
                       }}
                     />
                     <input
                       type="text"
-                      value={form.imageUrl.startsWith("data:") ? "" : form.imageUrl}
+                      value={form.imageUrl}
                       onChange={(e) => setForm({ ...form, imageUrl: e.target.value })}
                       className="w-full px-4 py-2.5 rounded-xl border border-brand-cream bg-cream focus:outline-none focus:ring-2 focus:ring-brand-dark text-brand-dark"
                       placeholder="https://example.com/image.jpg"
