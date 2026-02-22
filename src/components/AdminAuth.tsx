@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Lock, Eye, EyeOff } from "lucide-react";
+import { AdminPasswordProvider } from "@/lib/admin-context";
 
 const ADMIN_PASSWORD = "Starseed888#";
 
@@ -12,11 +13,13 @@ interface AdminAuthProps {
 export default function AdminAuth({ children }: AdminAuthProps) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState("");
+  const [adminPassword, setAdminPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   function handleLogin(e: React.FormEvent) {
     e.preventDefault();
     if (password === ADMIN_PASSWORD) {
+      setAdminPassword(password);
       setIsAuthenticated(true);
       setError("");
     } else {
@@ -76,5 +79,5 @@ export default function AdminAuth({ children }: AdminAuthProps) {
     );
   }
 
-  return <>{children}</>;
+  return <AdminPasswordProvider password={adminPassword}>{children}</AdminPasswordProvider>;
 }

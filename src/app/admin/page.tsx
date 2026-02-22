@@ -17,15 +17,10 @@ import {
   MessageCircle,
   Upload,
 } from "lucide-react";
-import {
-  getProducts,
-  addProduct,
-  updateProduct,
-  deleteProduct,
-  getConfig,
-  saveConfig,
-} from "@/lib/store";
 import { Product, StoreConfig, CATEGORIES } from "@/lib/types";
+import { fetchProducts, saveProductsToServer, fetchConfig, saveConfigToServer } from "@/lib/api";
+import { useAdminPassword } from "@/lib/admin-context";
+import { sanitizeText, sanitizeUrl, sanitizeImageUrl } from "@/lib/sanitize";
 
 type Tab = "products" | "settings";
 
@@ -61,10 +56,18 @@ export default function AdminPage() {
   const [saveMessage, setSaveMessage] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [uploadingImage, setUploadingImage] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const adminPassword = useAdminPassword();
 
   useEffect(() => {
-    setProducts(getProducts());
-    setConfig(getConfig());
+    async function loadData() {
+      setLoading(true);
+      const [prods, conf] = await Promise.all([fetchProducts(), fetchConfig()]);
+      setProducts(prods);
+      setConfig(conf);
+      setLoading(false);
+    }
+    loadData();
   }, []);
 
   function showSaved(msg: string) {
@@ -93,15 +96,20 @@ export default function AdminPage() {
     setShowForm(true);
   }
 
-  function handleDelete(id: string) {
+  async function handleDelete(id: string) {
     if (confirm("Are you sure you want to delete this product?")) {
-      deleteProduct(id);
-      setProducts(getProducts());
-      showSaved("Product deleted!");
+      const updated = products.filter((p) => p.id !== id);
+      const ok = await saveProductsToServer(updated, adminPassword);
+      if (ok) {
+        setProducts(updated);
+        showSaved("Product deleted!");
+      } else {
+        showSaved("Error deleting product");
+      }
     }
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const price = parseFloat(form.price);
     if (isNaN(price) || price < 0) {
@@ -110,34 +118,51 @@ export default function AdminPage() {
     }
 
     const productData = {
-      name: form.name,
-      description: form.description,
+      name: sanitizeText(form.name),
+      description: sanitizeText(form.description),
       price,
       category: form.category,
-      imageUrl: form.imageUrl,
-      purchaseLink: form.purchaseLink,
+      imageUrl: sanitizeImageUrl(form.imageUrl),
+      purchaseLink: sanitizeUrl(form.purchaseLink),
       featured: form.featured,
       inStock: form.inStock,
     };
 
+    let updated: Product[];
     if (editingId) {
-      updateProduct(editingId, productData);
-      showSaved("Product updated!");
+      updated = products.map((p) =>
+        p.id === editingId ? { ...p, ...productData } : p
+      );
     } else {
-      addProduct(productData);
-      showSaved("Product added!");
+      const newProduct: Product = {
+        ...productData,
+        id: Date.now().toString(),
+        createdAt: new Date().toISOString(),
+      };
+      updated = [...products, newProduct];
     }
 
-    setProducts(getProducts());
+    const ok = await saveProductsToServer(updated, adminPassword);
+    if (ok) {
+      setProducts(updated);
+      showSaved(editingId ? "Product updated!" : "Product added!");
+    } else {
+      showSaved("Error saving product");
+    }
+
     setShowForm(false);
     setEditingId(null);
     setForm(emptyForm);
   }
 
-  function handleSaveConfig() {
+  async function handleSaveConfig() {
     if (config) {
-      saveConfig(config);
-      showSaved("Settings saved!");
+      const ok = await saveConfigToServer(config, adminPassword);
+      if (ok) {
+        showSaved("Settings saved!");
+      } else {
+        showSaved("Error saving settings");
+      }
     }
   }
 

@@ -8,7 +8,7 @@ import ProductCard from "@/components/ProductCard";
 import CartDrawer from "@/components/CartDrawer";
 import WelcomeAudio from "@/components/WelcomeAudio";
 import ChakraLady from "@/components/ChakraLady";
-import { getProducts, getConfig } from "@/lib/store";
+import { fetchProducts, fetchConfig } from "@/lib/api";
 import { getCart, addToCart, getCartCount, CartItem } from "@/lib/cart";
 import { Product, StoreConfig, CATEGORIES } from "@/lib/types";
 
@@ -20,8 +20,12 @@ export default function Home() {
   const [cartOpen, setCartOpen] = useState(false);
 
   useEffect(() => {
-    setProducts(getProducts());
-    setConfig(getConfig());
+    async function loadData() {
+      const [prods, conf] = await Promise.all([fetchProducts(), fetchConfig()]);
+      setProducts(prods);
+      setConfig(conf);
+    }
+    loadData();
     setCart(getCart());
   }, []);
 
