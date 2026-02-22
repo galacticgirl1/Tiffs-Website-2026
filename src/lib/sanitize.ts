@@ -42,6 +42,12 @@ export function sanitizeUrl(url: string): string {
 // Sanitize image URL — must be a valid image source
 export function sanitizeImageUrl(url: string): string {
   if (!url) return "";
+
+  // Allow base64 data URLs for uploaded images (image types only)
+  if (url.startsWith("data:image/")) {
+    return url;
+  }
+
   const sanitized = sanitizeUrl(url);
   // Extra check: block event handler injection in URL strings
   if (/on\w+\s*=/i.test(sanitized)) return "";

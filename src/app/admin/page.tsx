@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import {
   Plus,
@@ -15,6 +15,7 @@ import {
   Package,
   ClipboardList,
   MessageCircle,
+  Upload,
 } from "lucide-react";
 import {
   getProducts,
@@ -58,6 +59,8 @@ export default function AdminPage() {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [form, setForm] = useState<ProductForm>(emptyForm);
   const [saveMessage, setSaveMessage] = useState("");
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [uploadingImage, setUploadingImage] = useState(false);
 
   useEffect(() => {
     setProducts(getProducts());
@@ -401,17 +404,55 @@ export default function AdminPage() {
 
                   <div>
                     <label className="block text-sm font-medium text-brand-medium mb-1">
-                      Image URL
+                      Product Image
                     </label>
+                    <div className="flex items-center gap-3 mb-2">
+                      <button
+                        type="button"
+                        onClick={() => fileInputRef.current?.click()}
+                        disabled={uploadingImage}
+                        className="flex items-center gap-2 bg-brand-dark text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-brand-medium transition-all disabled:opacity-50"
+                      >
+                        <Upload size={16} />
+                        {uploadingImage ? "Processing..." : "Upload Image"}
+                      </button>
+                      <span className="text-xs text-brand-light">or paste a URL below</span>
+                    </div>
                     <input
-                      type="url"
-                      value={form.imageUrl}
+                      ref={fileInputRef}
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        if (!file) return;
+                        if (file.size > 2 * 1024 * 1024) {
+                          alert("Image must be under 2MB. Please use a smaller image.");
+                          return;
+                        }
+                        setUploadingImage(true);
+                        const reader = new FileReader();
+                        reader.onloadend = () => {
+                          setForm({ ...form, imageUrl: reader.result as string });
+                          setUploadingImage(false);
+                        };
+                        reader.onerror = () => {
+                          alert("Failed to read image. Please try again.");
+                          setUploadingImage(false);
+                        };
+                        reader.readAsDataURL(file);
+                        e.target.value = "";
+                      }}
+                    />
+                    <input
+                      type="text"
+                      value={form.imageUrl.startsWith("data:") ? "" : form.imageUrl}
                       onChange={(e) => setForm({ ...form, imageUrl: e.target.value })}
                       className="w-full px-4 py-2.5 rounded-xl border border-brand-cream bg-cream focus:outline-none focus:ring-2 focus:ring-brand-dark text-brand-dark"
                       placeholder="https://example.com/image.jpg"
                     />
                     <p className="text-xs text-brand-light mt-1">
-                      Paste a direct link to a product image (from Unsplash, your website, etc.)
+                      Upload a photo from your device or paste a direct image URL
                     </p>
                     {form.imageUrl && (
                       <div className="mt-2 w-24 h-24 rounded-lg overflow-hidden border border-brand-cream">
