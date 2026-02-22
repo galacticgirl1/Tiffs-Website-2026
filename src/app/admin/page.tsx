@@ -166,6 +166,14 @@ export default function AdminPage() {
     }
   }
 
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-cream flex items-center justify-center">
+        <p className="text-brand-medium text-lg">Loading admin panel...</p>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-cream">
       {/* Admin Header */}

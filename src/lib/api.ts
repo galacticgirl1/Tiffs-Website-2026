@@ -6,9 +6,13 @@ import { Product, StoreConfig } from "./types";
 export async function fetchProducts(): Promise<Product[]> {
   try {
     const res = await fetch("/api/products", { cache: "no-store" });
-    if (!res.ok) throw new Error("Failed to fetch products");
+    if (!res.ok) {
+      console.error("Failed to fetch products:", res.status, res.statusText);
+      return [];
+    }
     return await res.json();
-  } catch {
+  } catch (err) {
+    console.error("fetchProducts error:", err);
     return [];
   }
 }
@@ -21,8 +25,14 @@ export async function saveProductsToServer(products: Product[], password: string
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ password, products }),
     });
-    return res.ok;
-  } catch {
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      console.error("Save products failed:", res.status, data);
+      return false;
+    }
+    return true;
+  } catch (err) {
+    console.error("saveProductsToServer error:", err);
     return false;
   }
 }
@@ -31,9 +41,13 @@ export async function saveProductsToServer(products: Product[], password: string
 export async function fetchConfig(): Promise<StoreConfig | null> {
   try {
     const res = await fetch("/api/config", { cache: "no-store" });
-    if (!res.ok) throw new Error("Failed to fetch config");
+    if (!res.ok) {
+      console.error("Failed to fetch config:", res.status, res.statusText);
+      return null;
+    }
     return await res.json();
-  } catch {
+  } catch (err) {
+    console.error("fetchConfig error:", err);
     return null;
   }
 }
@@ -46,8 +60,14 @@ export async function saveConfigToServer(config: StoreConfig, password: string):
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ password, config }),
     });
-    return res.ok;
-  } catch {
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      console.error("Save config failed:", res.status, data);
+      return false;
+    }
+    return true;
+  } catch (err) {
+    console.error("saveConfigToServer error:", err);
     return false;
   }
 }

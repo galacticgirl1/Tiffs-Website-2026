@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Instagram, Facebook, Youtube, Twitter, Globe, Heart } from "lucide-react";
-import { getConfig } from "@/lib/store";
+import { fetchConfig } from "@/lib/api";
 import { StoreConfig } from "@/lib/types";
 
 function TikTokIcon({ size = 18 }: { size?: number }) {
@@ -25,7 +25,7 @@ export default function Footer() {
   const [config, setConfig] = useState<StoreConfig | null>(null);
 
   useEffect(() => {
-    setConfig(getConfig());
+    fetchConfig().then((c) => { if (c) setConfig(c); });
   }, []);
 
   const socialLinks = config?.socialLinks;

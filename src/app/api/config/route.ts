@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { put, head } from "@vercel/blob";
+import { put, list } from "@vercel/blob";
 
 const CONFIG_BLOB_KEY = "mbs-config.json";
 const ADMIN_PASSWORD = "Starseed888#";
@@ -23,39 +23,50 @@ const DEFAULT_CONFIG = {
 
 async function getConfig() {
   try {
-    const blob = await head(CONFIG_BLOB_KEY);
-    if (blob) {
-      const response = await fetch(blob.url);
-      return await response.json();
+    const { blobs } = await list({ prefix: CONFIG_BLOB_KEY });
+    if (blobs.length > 0) {
+      const response = await fetch(blobs[0].url, { cache: "no-store" });
+      if (response.ok) {
+        return await response.json();
+      }
     }
-  } catch {
-    // Blob doesn't exist yet, use defaults
+  } catch (err) {
+    console.error("Error reading config blob:", err);
   }
   return DEFAULT_CONFIG;
 }
 
 // GET — anyone can read config
 export async function GET() {
-  const config = await getConfig();
-  return NextResponse.json(config);
+  try {
+    const config = await getConfig();
+    return NextResponse.json(config);
+  } catch (err) {
+    console.error("GET /api/config error:", err);
+    return NextResponse.json(DEFAULT_CONFIG, { status: 200 });
+  }
 }
 
 // POST — admin only, save config
 export async function POST(request: NextRequest) {
   try {
-    const { password, config } = await request.json();
+    const body = await request.json();
+    const { password, config } = body;
+
     if (password !== ADMIN_PASSWORD) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    await put(CONFIG_BLOB_KEY, JSON.stringify(config), {
+    const blob = await put(CONFIG_BLOB_KEY, JSON.stringify(config), {
       access: "public",
       addRandomSuffix: false,
     });
 
-    return NextResponse.json({ success: true });
+    console.log("Config saved to blob:", blob.url);
+    return NextResponse.json({ success: true, url: blob.url });
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : "Server error";
+    console.error("POST /api/config error:", message);
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }
