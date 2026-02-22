@@ -99,12 +99,12 @@ export default function AdminPage() {
   async function handleDelete(id: string) {
     if (confirm("Are you sure you want to delete this product?")) {
       const updated = products.filter((p) => p.id !== id);
-      const ok = await saveProductsToServer(updated, adminPassword);
-      if (ok) {
+      const result = await saveProductsToServer(updated, adminPassword);
+      if (result.ok) {
         setProducts(updated);
         showSaved("Product deleted!");
       } else {
-        showSaved("Error deleting product");
+        showSaved("Error: " + (result.error || "Unknown error"));
       }
     }
   }
@@ -142,12 +142,12 @@ export default function AdminPage() {
       updated = [...products, newProduct];
     }
 
-    const ok = await saveProductsToServer(updated, adminPassword);
-    if (ok) {
+    const result = await saveProductsToServer(updated, adminPassword);
+    if (result.ok) {
       setProducts(updated);
       showSaved(editingId ? "Product updated!" : "Product added!");
     } else {
-      showSaved("Error saving product");
+      showSaved("Error: " + (result.error || "Unknown error"));
     }
 
     setShowForm(false);

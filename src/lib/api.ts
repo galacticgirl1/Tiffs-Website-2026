@@ -18,7 +18,7 @@ export async function fetchProducts(): Promise<Product[]> {
 }
 
 // Save products via the server API (admin only)
-export async function saveProductsToServer(products: Product[], password: string): Promise<boolean> {
+export async function saveProductsToServer(products: Product[], password: string): Promise<{ ok: boolean; error?: string }> {
   try {
     const res = await fetch("/api/products", {
       method: "POST",
@@ -28,12 +28,12 @@ export async function saveProductsToServer(products: Product[], password: string
     if (!res.ok) {
       const data = await res.json().catch(() => ({}));
       console.error("Save products failed:", res.status, data);
-      return false;
+      return { ok: false, error: data.error || `Server error ${res.status}` };
     }
-    return true;
+    return { ok: true };
   } catch (err) {
     console.error("saveProductsToServer error:", err);
-    return false;
+    return { ok: false, error: String(err) };
   }
 }
 
