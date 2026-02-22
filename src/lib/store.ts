@@ -3,7 +3,7 @@
 import { Product, StoreConfig } from "./types";
 import { sanitizeText, sanitizeUrl, sanitizeImageUrl } from "./sanitize";
 
-const PRODUCTS_KEY = "mbs_products_v6";
+const PRODUCTS_KEY = "mbs_products_v7";
 const CONFIG_KEY = "mbs_config_v6";
 
 const DEFAULT_CONFIG: StoreConfig = {
@@ -31,7 +31,7 @@ const SAMPLE_PRODUCTS: Product[] = [
       "Hand-poured soy candle with pure lavender essential oil. Perfect for relaxation and meditation. Burns for 40+ hours.",
     price: 24.99,
     category: "candles",
-    imageUrl: "https://images.unsplash.com/photo-1602607616907-faf0f0a68e3a?w=400&h=400&fit=crop",
+    imageUrl: "/candles.jpg",
     purchaseLink: "#",
     featured: true,
     inStock: true,
@@ -44,7 +44,7 @@ const SAMPLE_PRODUCTS: Product[] = [
       "Warm vanilla and honey blend that fills your space with a cozy, inviting aroma. Made with natural beeswax.",
     price: 28.99,
     category: "candles",
-    imageUrl: "https://images.unsplash.com/photo-1603905179474-10067ef3c636?w=400&h=400&fit=crop",
+    imageUrl: "/candles.jpg",
     purchaseLink: "#",
     featured: true,
     inStock: true,
@@ -57,7 +57,7 @@ const SAMPLE_PRODUCTS: Product[] = [
       "Luxurious whipped body butter infused with rose petals and shea butter. Deep moisture for silky smooth skin.",
     price: 18.99,
     category: "body",
-    imageUrl: "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=400&h=400&fit=crop",
+    imageUrl: "/body-oils.jpg",
     purchaseLink: "#",
     featured: true,
     inStock: true,
@@ -70,7 +70,7 @@ const SAMPLE_PRODUCTS: Product[] = [
       "Vitamin C brightening serum with hyaluronic acid. Reveals your natural radiance in just 7 days.",
     price: 34.99,
     category: "skincare",
-    imageUrl: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400&h=400&fit=crop",
+    imageUrl: "/body-oils.jpg",
     purchaseLink: "#",
     featured: false,
     inStock: true,
@@ -83,7 +83,7 @@ const SAMPLE_PRODUCTS: Product[] = [
       "Set of 4 long-lasting matte liquid lipsticks in universally flattering shades. Vegan and cruelty-free.",
     price: 29.99,
     category: "beauty",
-    imageUrl: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=400&h=400&fit=crop",
+    imageUrl: "/body-oils.jpg",
     purchaseLink: "#",
     featured: false,
     inStock: true,
@@ -96,7 +96,20 @@ const SAMPLE_PRODUCTS: Product[] = [
       "The ultimate self-care package: 1 signature candle, body butter, facial mask, and bath salts. Gift-wrapped.",
     price: 64.99,
     category: "bundles",
-    imageUrl: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=400&h=400&fit=crop",
+    imageUrl: "/candles.jpg",
+    purchaseLink: "#",
+    featured: true,
+    inStock: true,
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: "7",
+    name: "Herbal Bath Salt",
+    description:
+      "Handmade herbal bath salt with Epsom salt, Lavender, Rose, Rosemary, Basil, Eucalyptus, Spearmint, Cinnamon, Pumpkin, and Sage. No preservatives. Made in Reading, PA.",
+    price: 18.99,
+    category: "bath-salts",
+    imageUrl: "/bath-salt.jpg",
     purchaseLink: "#",
     featured: true,
     inStock: true,
