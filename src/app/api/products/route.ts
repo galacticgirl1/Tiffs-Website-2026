@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { put, list } from "@vercel/blob";
+import { put, get } from "@vercel/blob";
 
 export const dynamic = "force-dynamic";
 
@@ -8,12 +8,11 @@ const ADMIN_PASSWORD = "Starseed888#";
 
 async function getProducts() {
   try {
-    const { blobs } = await list({ prefix: PRODUCTS_BLOB_KEY });
-    if (blobs.length > 0) {
-      const response = await fetch(blobs[0].downloadUrl, { cache: "no-store" });
-      if (response.ok) {
-        return await response.json();
-      }
+    const result = await get(PRODUCTS_BLOB_KEY, { access: "private" });
+    if (result && result.stream) {
+      const response = new Response(result.stream);
+      const data = await response.json();
+      return data;
     }
   } catch (err) {
     console.error("Error reading products blob:", err);
