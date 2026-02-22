@@ -459,8 +459,8 @@ export default function AdminPage() {
                       onChange={(e) => {
                         const file = e.target.files?.[0];
                         if (!file) return;
-                        if (file.size > 2 * 1024 * 1024) {
-                          alert("Image must be under 2MB. Please use a smaller image.");
+                        if (file.size > 5 * 1024 * 1024) {
+                          alert("Image must be under 5MB. Please use a smaller image.");
                           return;
                         }
                         setUploadingImage(true);
