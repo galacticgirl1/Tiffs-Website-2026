@@ -12,6 +12,7 @@ export async function GET() {
     const blob = await put("mbs-products.json", JSON.stringify(testProducts), {
       access: "private",
       addRandomSuffix: false,
+      allowOverwrite: true,
     });
     results.step1_write = "SUCCESS - url: " + blob.url + " | downloadUrl: " + blob.downloadUrl;
   } catch (err) {

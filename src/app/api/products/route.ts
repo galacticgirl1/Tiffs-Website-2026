@@ -49,6 +49,7 @@ export async function POST(request: NextRequest) {
     const blob = await put(PRODUCTS_BLOB_KEY, JSON.stringify(products), {
       access: "private",
       addRandomSuffix: false,
+      allowOverwrite: true,
     });
 
     console.log("Products saved to blob:", blob.url);

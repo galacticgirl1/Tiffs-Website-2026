@@ -62,6 +62,7 @@ export async function POST(request: NextRequest) {
     const blob = await put(CONFIG_BLOB_KEY, JSON.stringify(config), {
       access: "private",
       addRandomSuffix: false,
+      allowOverwrite: true,
     });
 
     console.log("Config saved to blob:", blob.url);
